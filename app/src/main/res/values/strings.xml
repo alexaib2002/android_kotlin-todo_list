@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KotlinTodo</string>
+    <string name="speak_txt_add_item">Add new item</string>
 </resources>

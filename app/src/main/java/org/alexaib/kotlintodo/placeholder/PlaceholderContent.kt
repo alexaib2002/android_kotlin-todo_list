@@ -1,7 +1,9 @@
 package org.alexaib.kotlintodo.placeholder
 
-import java.util.ArrayList
+import org.alexaib.kotlintodo.model.TodoTask
 import java.util.HashMap
+import java.util.Random
+import kotlin.collections.ArrayList
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -14,14 +16,14 @@ object PlaceholderContent {
     /**
      * An array of sample (placeholder) items.
      */
-    val ITEMS: MutableList<PlaceholderItem> = ArrayList()
+    val ITEMS: ArrayList<TodoTask> = ArrayList()
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, PlaceholderItem> = HashMap()
+    val ITEM_MAP: MutableMap<Int, TodoTask> = HashMap()
 
-    private val COUNT = 25
+    private val COUNT = 15
 
     init {
         // Add some sample items.
@@ -30,23 +32,16 @@ object PlaceholderContent {
         }
     }
 
-    private fun addItem(item: PlaceholderItem) {
+    private fun addItem(item: TodoTask) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP[item.id] = item
     }
 
-    private fun createPlaceholderItem(position: Int): PlaceholderItem {
-        return PlaceholderItem(position.toString(), "Item " + position, makeDetails(position))
+    private fun createPlaceholderItem(position: Int): TodoTask {
+        return TodoTask(position, "Item " + position, generateCompletionStatus())
     }
 
-    private fun makeDetails(position: Int): String {
-        val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
-        return builder.toString()
-    }
+    private fun generateCompletionStatus(): Boolean = Random().nextBoolean()
 
     /**
      * A placeholder item representing a piece of content.
